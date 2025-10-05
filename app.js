@@ -21,8 +21,9 @@ import 'nipplejs';
     const code=inviteBoxes.map(b=>(b.value||'').trim()).join('');
     const name = (displayName.value||'').trim();
     const nameValid = /^[A-Za-z0-9]{3,}$/.test(name);
-    const codeValid = code.length===8;
-    if(codeValid && nameValid){
+    // only reveal join if the code exactly matches today's invite code and name is valid
+    const codeMatchesToday = code === todaysInviteCode();
+    if(codeMatchesToday && nameValid){
       joinBtn.style.visibility = 'visible';
       joinBtn.disabled = false;
     } else {
