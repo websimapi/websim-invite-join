@@ -95,12 +95,16 @@ import 'nipplejs';
   });
 
   refresh();
-  // fade loader out first, then reveal the app after the loader's CSS transition finishes
+  // start loader fade-out, wait for transition to finish, then reveal app
   requestAnimationFrame(()=>{
     loader.classList.add('hidden');
-    loader.addEventListener('transitionend', ()=>{
-      appRoot.classList.add('ready');
-      loader.setAttribute('aria-hidden','true');
-    }, { once: true });
+    loader.addEventListener('transitionend', function onEnd(e){
+      if(e.propertyName === 'opacity'){
+        loader.removeEventListener('transitionend', onEnd);
+        loader.style.display = 'none';
+        loader.setAttribute('aria-hidden','true');
+        appRoot.classList.add('ready');
+      }
+    });
   });
 })();
