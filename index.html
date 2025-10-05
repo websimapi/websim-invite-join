@@ -4,17 +4,20 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Invite Join</title>
-  <style>
-    /* Critical inline CSS to prevent flash-of-unstyled-content: show only loader, hide main UI until ready */
-    #loader{visibility:visible;opacity:1;position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#000;z-index:10000}
-    #app,#overlay{visibility:hidden;opacity:0;transition:opacity .3s,visibility .3s}
-  </style>
   <link href="https://fonts.googleapis.com/css2?family=Caladea&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script type="importmap">{"imports":{"nipplejs":"https://esm.sh/nipplejs@0.9.0"}}</script>
+
+  <!-- inline critical CSS to prevent flash: show only loader on first paint and hide main UI -->
+  <style>
+    /* critical: ensure loader is visible immediately and app/overlay hidden */
+    #loader{visibility:visible;opacity:1;position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#000;color:#fff;z-index:1000}
+    #app,#overlay{visibility:hidden;opacity:0;pointer-events:none}
+    /* when JS finishes it will add .ready to #app and hide loader via existing stylesheet transitions */
+  </style>
 </head>
 <body>
-  <!-- loader -->
+  <!-- loader (must be first element for first-paint) -->
   <div id="loader" role="status" aria-hidden="false"><div class="loader-card"><div class="spinner" aria-hidden="true"></div><div class="loader-text">Loading MemeForge…</div></div></div>
 
   <div id="app" style="visibility:hidden;opacity:0;">
@@ -52,18 +55,7 @@
       </div>
     </div>
 
-    <main id="main-content">
-      <!-- basic visible app content so the user sees the rest of the app -->
-      <section class="app-welcome">
-        <h2>Welcome to MemeForge</h2>
-        <p>Explore templates, create motion memes, and invite collaborators.</p>
-        <div class="placeholder-cards">
-          <div class="card-mini">Create</div>
-          <div class="card-mini">Browse</div>
-          <div class="card-mini">Settings</div>
-        </div>
-      </section>
-    </main>
+    <main id="main-content"></main>
   </div>
   <script src="app.js" type="module"></script>
 <!-- ...existing content... -->

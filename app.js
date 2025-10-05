@@ -95,5 +95,12 @@ import 'nipplejs';
   });
 
   refresh();
-  requestAnimationFrame(()=>{appRoot.classList.add('ready');loader.classList.add('hidden');loader.setAttribute('aria-hidden','true')});
+  // fade loader out first, then reveal the app after the loader's CSS transition finishes
+  requestAnimationFrame(()=>{
+    loader.classList.add('hidden');
+    loader.addEventListener('transitionend', ()=>{
+      appRoot.classList.add('ready');
+      loader.setAttribute('aria-hidden','true');
+    }, { once: true });
+  });
 })();

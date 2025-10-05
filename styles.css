@@ -1,13 +1,7 @@
 /* ...existing styles... */
 body { background: #000; color: #fff; } /* set main page background to black */
 /* ensure main area covers viewport behind the overlay */
-#main-content { min-height: 100vh; background: transparent; margin-left:96px; padding:28px; } /* leave space for left nav */
-/* simple visible placeholders for the main app */
-.app-welcome h2{margin:0 0 8px;font-family:Caladea, sans-serif;color:#fff}
-.app-welcome p{margin:0 0 16px;color:rgba(255,255,255,0.82)}
-.placeholder-cards{display:flex;gap:12px}
-.card-mini{background:rgba(255,255,255,0.03);padding:18px;border-radius:10px;min-width:110px;text-align:center;color:#fff;font-weight:600}
-
+#main-content { min-height: 100vh; background: transparent; }
 /* loader/overlay/app visibility */
 #loader{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(rgba(2,10,25,0.88),rgba(2,10,25,0.88)),url('/asset_background.png') center/cover no-repeat;z-index:1000;transition:opacity .35s,visibility .35s;color:#fff}
 #loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
