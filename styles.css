@@ -84,7 +84,7 @@ body{
 /* make invite boxes smaller */
 .invite-code-row{display:inline-flex;gap:6px;align-items:center}
 .invite-box{
-  width:28px;
+  width:14px;
   height:38px;
   text-align:center;
   font-size:16px;
