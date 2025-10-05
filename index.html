@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Invite Join</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Caladea&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "nipplejs": "https://esm.sh/nipplejs@0.9.0"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- ...existing content... -->
+  <div id="app">
+    <div id="overlay" class="hidden" role="dialog" aria-modal="true" aria-labelledby="invite-title">
+      <div class="card">
+        <h1 id="invite-title">Meet the <span class="blank">____</span></h1>
+        <p class="subtitle">Turn your ideas into with motion and sound instantly!</p>
+
+        <div id="not-found-msg" class="notice">You need an invite code to join</div>
+
+        <label class="field">
+          <div class="label-text">Invite code</div>
+          <input id="invite-input" type="text" inputmode="numeric" autocomplete="one-time-code" placeholder="Enter invite code" />
+        </label>
+
+        <label class="field">
+          <div class="label-text">Display name</div>
+          <input id="display-name" type="text" maxlength="32" placeholder="Pick a display name" />
+        </label>
+
+        <div class="actions">
+          <button id="join-btn" class="btn" disabled>Join</button>
+        </div>
+
+        <p id="status" class="status" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <!-- app content placeholder -->
+    <main id="main-content">
+      <!-- ...existing content... -->
+      <h2>Welcome</h2>
+      <p>Your app content goes here.</p>
+      <!-- ...existing content... -->
+    </main>
+  </div>
+  <script src="app.js" type="module"></script>
+  <!-- ...existing content... -->
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
+
