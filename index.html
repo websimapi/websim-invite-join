@@ -13,20 +13,8 @@
   <div id="loader" role="status" aria-hidden="false"><div class="loader-card"><div class="spinner" aria-hidden="true"></div><div class="loader-text">Loading MemeForge…</div></div></div>
 
   <div id="app">
-    <!-- left navigation panel -->
-    <nav id="left-nav" aria-label="Main navigation">
-      <div class="nav-top">
-        <button class="nav-btn" aria-label="Home">🏠</button>
-        <button class="nav-btn" aria-label="Search">🔍</button>
-        <button class="nav-btn" aria-label="Notifications">🔔</button>
-      </div>
-      <div class="nav-center">
-        <button class="pfp" aria-label="User profile">U</button>
-      </div>
-      <div class="nav-bottom">
-        <button class="more" aria-label="More">…</button>
-      </div>
-    </nav>
+    <!-- nav will be injected lazily after loader finishes -->
+    <div id="nav-placeholder" aria-hidden="true"></div>
 
     <div id="overlay" class="hidden" role="dialog" aria-modal="true" aria-labelledby="invite-title">
       <div class="card">

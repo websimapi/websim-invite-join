@@ -2,6 +2,7 @@ import 'nipplejs';
 (async()=>{
   const $=s=>document.querySelector(s);
   const loader=$('#loader'), appRoot=$('#app'), overlay=$('#overlay');
+  const navPlaceholder = $('#nav-placeholder');
   const inviteBoxes=[...document.querySelectorAll('.invite-box')], displayName=$('#display-name'), joinBtn=$('#join-btn'), statusEl=$('#status');
   joinBtn.style.visibility = 'hidden'; // hide visually but keep layout space
   const loadImg=s=>new Promise(r=>{const i=new Image();i.onload=i.onerror=()=>r();i.src=s});
@@ -24,6 +25,7 @@ import 'nipplejs';
     return null;
   };
   const setPfpImage=async(user)=>{
+    // ensure nav exists before trying to find pfp button
     const pfpBtn = document.querySelector('.pfp');
     const url = await getAvatarForUser(user);
     if(url){
@@ -36,13 +38,38 @@ import 'nipplejs';
     }
   };
 
+  // lazy render nav after loader finishes
+  const renderNav = (user) => {
+    if(!navPlaceholder) return;
+    navPlaceholder.innerHTML = `
+      <nav id="left-nav" aria-label="Main navigation">
+        <div class="nav-top">
+          <button class="nav-btn" aria-label="Home">🏠</button>
+          <button class="nav-btn" aria-label="Search">🔍</button>
+          <button class="nav-btn" aria-label="Notifications">🔔</button>
+        </div>
+        <div class="nav-center">
+          <button class="pfp" aria-label="User profile">U</button>
+        </div>
+        <div class="nav-bottom">
+          <button class="more" aria-label="More">…</button>
+        </div>
+      </nav>
+    `;
+    navPlaceholder.setAttribute('aria-hidden','false');
+    // set pfp now that nav exists
+    setPfpImage(user);
+  };
+
   const findRegistration=async username=>(await room.collection('author_meta').filter({username}).getList())?.[0]||null;
 
   try{
     const user=await getCurrentUser();
-    await setPfpImage(user);
     if(!user) overlay.classList.remove('hidden'); else { const ex=await findRegistration(user.username); if(!ex) overlay.classList.remove('hidden'); }
-  }catch(e){console.error(e);overlay.classList.remove('hidden')}
+    // don't render nav until after loader fades; render it now so it appears after loader hides
+    // we wait for the appRoot ready state below before actually showing the app UI
+    renderNav(user);
+  }catch(e){console.error(e);overlay.classList.remove('hidden'); renderNav(null)}
 
   const refresh=()=>{
     const code=inviteBoxes.map(b=>(b.value||'').trim()).join('');
@@ -95,5 +122,10 @@ import 'nipplejs';
   });
 
   refresh();
-  requestAnimationFrame(()=>{appRoot.classList.add('ready');loader.classList.add('hidden');loader.setAttribute('aria-hidden','true')});
+  requestAnimationFrame(()=>{
+    // reveal application and then hide loader — nav was injected earlier but will only be visible once app shows
+    appRoot.classList.add('ready');
+    loader.classList.add('hidden');
+    loader.setAttribute('aria-hidden','true');
+  });
 })();
