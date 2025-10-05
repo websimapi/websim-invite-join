@@ -51,9 +51,17 @@ import 'nipplejs';
       const user=await getCurrentUser(); const username=user?user.username:'anonymous';
       let existing=await findRegistration(username);
       const payload={registered_at:new Date().toISOString(),display_name:name};
-      if(existing){await room.collection('author_meta').update(existing.id,{col1:JSON.stringify(payload)});statusEl.textContent='Updated registration. Welcome back!'}
-      else{await room.collection('author_meta').create({col1:JSON.stringify(payload)});statusEl.textContent='Registration complete. Welcome!'}
-      setTimeout(()=>overlay.classList.add('hidden'),700);
+      if(existing){
+        await room.collection('author_meta').update(existing.id,{col1:JSON.stringify(payload)});
+      }
+      else{
+        await room.collection('author_meta').create({col1:JSON.stringify(payload)});
+      }
+      // fade the UI away on success (no status text)
+      setTimeout(()=>{
+        overlay.classList.add('hidden');
+        appRoot.classList.remove('ready');
+      },700);
     }catch(err){console.error(err);statusEl.textContent='Failed to register. Try again.';joinBtn.disabled=false}
   });
 
