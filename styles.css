@@ -37,11 +37,11 @@ input::placeholder{color:rgba(255,255,255,0.35)}
 
 /* left navigation column */
 #left-nav{position:fixed;left:6px;top:12px;bottom:12px;width:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:80;pointer-events:auto} /* center nav items vertically */
-#left-nav .nav-top,#left-nav .nav-center{display:flex;flex-direction:column;align-items:center;gap:20px} /* increased vertical spacing between nav buttons */
+#left-nav .nav-top,#left-nav .nav-center{display:flex;flex-direction:column;align-items:center;gap:26px} /* increased vertical spacing between nav buttons */
 /* ensure the center group has the same vertical spacing relative to the top group */
-#left-nav .nav-center{margin-top:20px;margin-bottom:12px}
+#left-nav .nav-center{margin-top:26px;margin-bottom:12px}
 /* place the more button anchored to bottom within the fixed nav area */
-#left-nav .nav-bottom{position:absolute;left:8px;bottom:12px;display:flex;flex-direction:column;align-items:center;gap:12px}
+#left-nav .nav-bottom{position:absolute;left:8px;bottom:12px;display:flex;flex-direction:column;align-items:center;gap:16px}
 /* ensure overlay stays centered with nav visible */
 #overlay{padding-left:60px} /* push overlay card slightly right so nav doesn't overlap content on small widths */
 
@@ -50,7 +50,7 @@ input::placeholder{color:rgba(255,255,255,0.35)}
 #left-nav .nav-bottom .more {
   width:26px;
   height:26px;
-  border-radius:50%;
+  border-radius:8px;
   display:inline-flex;
   align-items:center;
   justify-content:center;
@@ -66,7 +66,7 @@ input::placeholder{color:rgba(255,255,255,0.35)}
 #left-nav .nav-center .pfp{
   width:26px;
   height:26px;
-  border-radius:50%;
+  border-radius:8px;
   display:inline-flex;
   align-items:center;
   justify-content:center;
