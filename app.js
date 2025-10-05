@@ -122,7 +122,7 @@ import 'nipplejs'; // kept via importmap for potential future use
 
   // prefill invite input hint (not the actual code) for UX
   // set a small hint on the first box to indicate date format (one-char placeholders per box)
-  if(inviteBoxes[0]) inviteBoxes[0].placeholder = 'M';
+  // if(inviteBoxes[0]) inviteBoxes[0].placeholder = 'M';
   refreshState();
 
 })();
