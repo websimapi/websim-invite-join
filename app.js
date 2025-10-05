@@ -34,6 +34,7 @@ import 'nipplejs';
   };
 
   inviteBoxes.forEach((box,i)=>{
+    box.addEventListener('focus',()=>box.select()); // ensure typing overrides existing content
     box.addEventListener('input',e=>{
       box.value=(box.value||'').replace(/\D/g,'').slice(0,1);
       if(box.value && i<inviteBoxes.length-1) inviteBoxes[i+1].focus(); refresh();
