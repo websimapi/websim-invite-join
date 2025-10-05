@@ -4,54 +4,55 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Invite Join</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Caladea&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <script type="importmap">{"imports":{"nipplejs":"https://esm.sh/nipplejs@0.9.0"}}</script>
+  <script type="importmap">
+  {
+    "imports": {
+      "nipplejs": "https://esm.sh/nipplejs@0.9.0"
+    }
+  }
+  </script>
 </head>
 <body>
-  <!-- loader -->
-  <div id="loader" role="status" aria-hidden="false"><div class="loader-card"><div class="spinner" aria-hidden="true"></div><div class="loader-text">Loading MemeForge…</div></div></div>
-
+  <!-- ...existing content... -->
   <div id="app">
-    <!-- left navigation panel -->
-    <nav id="left-nav" aria-label="Main navigation">
-      <div class="nav-top">
-        <button class="nav-btn" aria-label="Home"><span class="material-icons-outlined" aria-hidden="true">home</span></button>
-        <button class="nav-btn" aria-label="Search"><span class="material-icons-outlined" aria-hidden="true">search</span></button>
-        <button class="nav-btn" aria-label="Notifications"><span class="material-icons-outlined" aria-hidden="true">notifications</span></button>
-      </div>
-      <div class="nav-center">
-        <button class="pfp" aria-label="User profile">U</button>
-      </div>
-      <div class="nav-bottom">
-        <button class="more" aria-label="More">…</button>
-      </div>
-    </nav>
-
     <div id="overlay" class="hidden" role="dialog" aria-modal="true" aria-labelledby="invite-title">
       <div class="card">
-        <h1 id="invite-title">Meet MemeForge</h1>
-        <p class="subtitle">Turn your ideas into a reality with motion and sound instantly!</p>
+        <h1 id="invite-title">Meet Clippie</h1>
+        <p class="subtitle">Turn your ideas into with motion and sound instantly!</p>
+
         <div id="not-found-msg" class="notice">You need an invite code to join</div>
 
-        <div class="field row">
-          <div class="invite-code-row" aria-label="Invite code">
-            <input class="invite-box" id="invite-0" type="text" inputmode="numeric" maxlength="1" autocomplete="one-time-code"/><input class="invite-box" id="invite-1" type="text" inputmode="numeric" maxlength="1"/><input class="invite-box" id="invite-2" type="text" inputmode="numeric" maxlength="1"/><input class="invite-box" id="invite-3" type="text" inputmode="numeric" maxlength="1"/><input class="invite-box" id="invite-4" type="text" inputmode="numeric" maxlength="1"/><input class="invite-box" id="invite-5" type="text" inputmode="numeric" maxlength="1"/><input class="invite-box" id="invite-6" type="text" inputmode="numeric" maxlength="1"/><input class="invite-box" id="invite-7" type="text" inputmode="numeric" maxlength="1"/>
-          </div>
+        <label class="field">
+          <div class="label-text">Invite code</div>
+          <input id="invite-input" type="text" inputmode="numeric" autocomplete="one-time-code" placeholder="Enter invite code" />
+        </label>
+
+        <label class="field">
+          <div class="label-text">Display name</div>
+          <input id="display-name" type="text" maxlength="32" placeholder="Pick a display name" />
+        </label>
+
+        <div class="actions">
+          <button id="join-btn" class="btn" disabled>Join</button>
         </div>
 
-        <div class="field row"><input id="display-name" type="text" maxlength="32" placeholder="Pick a display name"/></div>
-
-        <div class="actions"><button id="join-btn" class="btn" disabled>Join</button></div>
         <p id="status" class="status" aria-live="polite"></p>
       </div>
     </div>
 
-    <main id="main-content"></main>
+    <!-- app content placeholder -->
+    <main id="main-content">
+      <!-- ...existing content... -->
+      <h2>Welcome</h2>
+      <p>Your app content goes here.</p>
+      <!-- ...existing content... -->
+    </main>
   </div>
   <script src="app.js" type="module"></script>
-<!-- ...existing content... -->
+  <!-- ...existing content... -->
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>

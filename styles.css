@@ -31,7 +31,8 @@ body{
 .hidden{display:none}
 
 .card{
-  background:#000;
+  /* use a subtle blue space/starfield background */
+  background: linear-gradient(rgba(2,10,25,0.75), rgba(2,10,25,0.55)), url('/asset_background.png') center/cover no-repeat;
   color:#fff;
   width:420px;
   max-width:95%;
