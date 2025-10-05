@@ -81,10 +81,11 @@ body{
 .label-text.invite-label{display:inline-block;text-align:left;width:140px;padding-top:0;color:rgba(255,255,255,0.9);margin-bottom:0;font-size:15px;font-weight:600}
 .field.row .label-text{width:140px;margin-bottom:0}
 
+.invite-code-row{display:inline-flex;gap:6px;align-items:center; width:25%; justify-content:space-between;}
+
 /* make invite boxes smaller */
-.invite-code-row{display:inline-flex;gap:6px;align-items:center}
 .invite-box{
-  width:28px;
+  flex:0 0 calc((100% - 42px) / 8); /* 8 boxes, subtract total gaps (7 * 6px = 42px) */
   height:38px;
   text-align:center;
   font-size:16px;
