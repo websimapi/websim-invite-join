@@ -75,13 +75,13 @@ body{
 /* fields */
 .field{display:block;margin-bottom:12px}
 /* add a row variant to place label on the left */
-.field.row{display:flex;align-items:center;justify-content:flex-start;gap:12px}
+.field.row{display:flex;align-items:center;justify-content:center;gap:12px}
 .label-text{font-size:12px;color:rgba(255,255,255,0.7);margin-bottom:6px}
 /* left-aligned label sizing for row layout */
-.label-text.invite-label{display:inline-block;text-align:left;width:140px;padding-top:0;color:rgba(255,255,255,0.9);margin-bottom:0;font-size:15px;font-weight:600}
+.label-text.invite-label{display:inline-block;text-align:right;width:120px;padding-top:0;color:rgba(255,255,255,0.9);margin-bottom:0;font-size:15px;font-weight:600}
 .field.row .label-text{width:140px;margin-bottom:0}
 
-.invite-code-row{display:inline-flex;gap:6px;align-items:center; width:25%; justify-content:space-between;}
+.invite-code-row{display:inline-flex;gap:6px;align-items:center;width:25%;justify-content:flex-end;}
 
 /* make invite boxes smaller */
 .invite-box{
@@ -134,4 +134,5 @@ input::placeholder{color:rgba(255,255,255,0.35)}
   width:25%;
   padding:10px 12px;
   font-size:15px;
+  text-align:left;
 }
