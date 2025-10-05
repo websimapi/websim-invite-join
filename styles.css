@@ -126,4 +126,12 @@ input::placeholder{color:rgba(255,255,255,0.35)}
 
 /* status */
 .status{margin-top:12px;font-size:16px;color:var(--muted)}
-/* ...existing styles... */
+
+/* make the display name input 1/4 width of the popup and match Invite label sizing */
+.field.row #display-name{
+  flex:0 0 25%;
+  max-width:25%;
+  width:25%;
+  padding:10px 12px;
+  font-size:15px;
+}
