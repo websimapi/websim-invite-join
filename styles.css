@@ -38,6 +38,7 @@ body{
   padding:20px;
   border-radius:10px;
   box-shadow:0 10px 30px rgba(2,6,23,0.5);
+  text-align:center;
 }
 
 /* Header */
@@ -46,6 +47,7 @@ body{
   font-size:22px;
   font-weight:600;
   color:#fff;
+  text-align:center;
 }
 .card .blank{
   color:transparent;
@@ -99,4 +101,3 @@ input::placeholder{color:rgba(255,255,255,0.35)}
 /* status */
 .status{margin-top:12px;font-size:13px;color:var(--muted)}
 /* ...existing styles... */
-
