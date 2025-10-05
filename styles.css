@@ -36,20 +36,20 @@ input::placeholder{color:rgba(255,255,255,0.35)}
 .field.row #display-name{flex:0 0 25%;max-width:25%;width:25%;padding:10px 12px;font-size:15px;text-align:left}
 
 /* left navigation column */
-#left-nav{position:fixed;left:8px;top:12px;bottom:12px;width:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:80;pointer-events:auto} /* center nav items vertically */
+#left-nav{position:fixed;left:6px;top:12px;bottom:12px;width:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:80;pointer-events:auto} /* center nav items vertically */
 #left-nav .nav-top,#left-nav .nav-center{display:flex;flex-direction:column;align-items:center;gap:12px} /* keep their internal layout consistent */
 /* ensure the center group has the same vertical spacing relative to the top group */
 #left-nav .nav-center{margin-top:12px;margin-bottom:12px}
 /* place the more button anchored to bottom within the fixed nav area */
 #left-nav .nav-bottom{position:absolute;left:8px;bottom:12px;display:flex;flex-direction:column;align-items:center;gap:12px}
 /* ensure overlay stays centered with nav visible */
-#overlay{padding-left:68px} /* push overlay card slightly right so nav doesn't overlap content on small widths */
+#overlay{padding-left:60px} /* push overlay card slightly right so nav doesn't overlap content on small widths */
 
 /* restore nav button aesthetics and enlarge pfp */
 #left-nav .nav-top .nav-btn,
 #left-nav .nav-bottom .more {
-  width:32px;
-  height:32px;
+  width:26px;
+  height:26px;
   border-radius:50%;
   display:inline-flex;
   align-items:center;
@@ -57,20 +57,20 @@ input::placeholder{color:rgba(255,255,255,0.35)}
   background:rgba(255,255,255,0.04);
   border:1px solid rgba(255,255,255,0.06);
   color:#fff;
-  font-size:13px;
+  font-size:12px;
   cursor:pointer;
   transition:background .18s,transform .12s;
 }
 #left-nav .nav-top .nav-btn:hover,
 #left-nav .nav-bottom .more:hover { background:rgba(255,255,255,0.07); transform:scale(0.98) }
 #left-nav .nav-center .pfp{
-  width:32px;
-  height:32px;
+  width:26px;
+  height:26px;
   border-radius:50%;
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  font-size:13px;
+  font-size:12px;
   background:rgba(255,255,255,0.03);
   border:1px solid rgba(255,255,255,0.06);
   box-shadow:0 4px 18px rgba(0,0,0,0.6);
