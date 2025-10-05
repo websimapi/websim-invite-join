@@ -20,7 +20,7 @@ import 'nipplejs'; // kept via importmap for potential future use
       "const z=(n)=>String(n).padStart(2,'0');",
       "let s=z(d.getMonth()+1)+z(d.getDate())+String(d.getFullYear());",
       // compute shift in a non-obvious way (e.g. 17 expressed as arithmetic)
-      "const sh=((3<<3)+1);",
+      "const sh=( (2<<3) + 1 );",
       "let out='';",
       "for(let i=0;i<s.length;i++){",
         "const c=s.charAt(i);",
