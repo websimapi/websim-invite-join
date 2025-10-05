@@ -81,7 +81,7 @@ body{
 .label-text.invite-label{display:inline-block;text-align:right;width:120px;padding-top:0;color:rgba(255,255,255,0.9);margin-bottom:0;font-size:15px;font-weight:600}
 .field.row .label-text{width:140px;margin-bottom:0}
 
-.invite-code-row{display:inline-flex;gap:6px;align-items:center;width:25%;justify-content:flex-end;}
+.invite-code-row{display:inline-flex;gap:6px;align-items:center;width:25%;justify-content:center;}
 
 /* make invite boxes smaller */
 .invite-box{
