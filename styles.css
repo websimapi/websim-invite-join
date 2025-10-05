@@ -40,6 +40,19 @@ body{
   border-radius:14px;
   box-shadow:0 10px 30px rgba(2,6,23,0.5);
   text-align:center;
+  position:relative; /* needed so canvas can overlay */
+}
+
+/* full-size canvas overlay for shader animation */
+#stars{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border-radius:14px;
+  display:block;
+  pointer-events:none;
+  mix-blend-mode:screen;
 }
 
 /* Header */
