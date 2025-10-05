@@ -37,6 +37,10 @@ input::placeholder{color:rgba(255,255,255,0.35)}
 
 /* left navigation column */
 #left-nav{position:fixed;left:6px;top:12px;bottom:12px;width:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:80;pointer-events:auto} /* center nav items vertically */
+/* logo slot at very top of nav */
+#left-nav .nav-logo{position:absolute;top:8px;left:8px;width:44px;height:44px;display:flex;align-items:center;justify-content:center}
+#left-nav .logo-btn{width:36px;height:36px;padding:4px;border-radius:8px;background:transparent;border:0;display:inline-flex;align-items:center;justify-content:center;cursor:default}
+#left-nav .logo-btn img{width:100%;height:100%;object-fit:contain;display:block}
 #left-nav .nav-top,#left-nav .nav-center{display:flex;flex-direction:column;align-items:center;gap:26px} /* increased vertical spacing between nav buttons */
 /* ensure the center group has the same vertical spacing relative to the top group */
 #left-nav .nav-center{margin-top:26px;margin-bottom:12px}
