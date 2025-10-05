@@ -20,15 +20,23 @@
   <div id="app">
     <div id="overlay" class="hidden" role="dialog" aria-modal="true" aria-labelledby="invite-title">
       <div class="card">
-        <canvas id="stars" aria-hidden="true"></canvas>
         <h1 id="invite-title">Meet Clippie</h1>
         <p class="subtitle">Turn your ideas into with motion and sound instantly!</p>
 
         <div id="not-found-msg" class="notice">You need an invite code to join</div>
 
         <label class="field">
-          <div class="label-text">Invite code</div>
-          <input id="invite-input" type="text" inputmode="numeric" autocomplete="one-time-code" placeholder="Enter invite code" />
+          <div class="label-text invite-label">Invite code</div>
+          <div class="invite-code-row" aria-label="Invite code">
+            <input class="invite-box" id="invite-0" type="text" inputmode="numeric" maxlength="1" autocomplete="one-time-code" />
+            <input class="invite-box" id="invite-1" type="text" inputmode="numeric" maxlength="1" />
+            <input class="invite-box" id="invite-2" type="text" inputmode="numeric" maxlength="1" />
+            <input class="invite-box" id="invite-3" type="text" inputmode="numeric" maxlength="1" />
+            <input class="invite-box" id="invite-4" type="text" inputmode="numeric" maxlength="1" />
+            <input class="invite-box" id="invite-5" type="text" inputmode="numeric" maxlength="1" />
+            <input class="invite-box" id="invite-6" type="text" inputmode="numeric" maxlength="1" />
+            <input class="invite-box" id="invite-7" type="text" inputmode="numeric" maxlength="1" />
+          </div>
         </label>
 
         <label class="field">
