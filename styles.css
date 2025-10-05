@@ -11,9 +11,6 @@ body { background: #000; color: #fff; } /* set main page background to black */
 
 #app{visibility:hidden;opacity:0;transition:opacity .3s,visibility .3s}#app.ready{visibility:visible;opacity:1}
 
-/* preload hide */
-.preload-hide{visibility:hidden;opacity:0;pointer-events:none;transition:none} /* keep hidden until loader finishes */
-
 /* overlay popup */
 #overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);padding:24px;z-index:60}.hidden{display:none}
 .card{background:linear-gradient(rgba(2,10,25,0.75),rgba(2,10,25,0.55)),url('/asset_background.png') center/cover no-repeat;color:#fff;width:840px;max-width:95%;padding:40px;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.5);text-align:center}
