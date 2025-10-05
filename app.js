@@ -3,6 +3,7 @@ import 'nipplejs';
   const $=s=>document.querySelector(s);
   const loader=$('#loader'), appRoot=$('#app'), overlay=$('#overlay');
   const inviteBoxes=[...document.querySelectorAll('.invite-box')], displayName=$('#display-name'), joinBtn=$('#join-btn'), statusEl=$('#status');
+  joinBtn.style.display = 'none'; // hide join button until valid input
   const loadImg=s=>new Promise(r=>{const i=new Image();i.onload=i.onerror=()=>r();i.src=s});
   await Promise.all([document.readyState==='complete'?Promise.resolve():new Promise(r=>window.addEventListener('load',r)),loadImg('/asset_background.png')]);
 
@@ -18,7 +19,17 @@ import 'nipplejs';
 
   const refresh=()=>{
     const code=inviteBoxes.map(b=>(b.value||'').trim()).join('');
-    joinBtn.disabled=!(code.length===8 && displayName.value.trim().length); statusEl.textContent=''
+    const name = (displayName.value||'').trim();
+    const nameValid = /^[A-Za-z0-9]{3,}$/.test(name);
+    const codeValid = code.length===8;
+    if(codeValid && nameValid){
+      joinBtn.style.display = '';
+      joinBtn.disabled = false;
+    } else {
+      joinBtn.style.display = 'none';
+      joinBtn.disabled = true;
+    }
+    statusEl.textContent=''
   };
 
   inviteBoxes.forEach((box,i)=>{
