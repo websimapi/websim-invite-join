@@ -2,11 +2,31 @@
 import 'nipplejs'; // kept via importmap for potential future use
 
 (async function(){
+  // Show loader (default visible in DOM). We'll wait for assets and initialization then hide it.
+  const loader = document.getElementById('loader');
+  const appRoot = document.getElementById('app');
+  const overlay = document.getElementById('overlay');
+
+  // helper to load an image (background) to ensure no flash
+  function loadImage(src){
+    return new Promise((res, rej)=>{
+      const img = new Image();
+      img.onload = () => res();
+      img.onerror = () => res(); // don't block app on failure
+      img.src = src;
+    });
+  }
+
+  // wait for DOM load, window load and background asset
+  await Promise.all([
+    document.readyState === 'complete' ? Promise.resolve() : new Promise(r => window.addEventListener('load', r)),
+    loadImage('/asset_background.png')
+  ]);
+
   // initialize WebsimSocket (global in environment)
   const room = new WebsimSocket();
 
   // DOM
-  const overlay = document.getElementById('overlay');
   const inviteBoxes = Array.from(document.querySelectorAll('.invite-box'));
   const displayNameInput = document.getElementById('display-name');
   const joinBtn = document.getElementById('join-btn');
@@ -35,23 +55,26 @@ import 'nipplejs'; // kept via importmap for potential future use
   }
 
   // on load: determine if current user has a record; if not show overlay
-  const currentUser = await getCurrentUser();
-  if(!currentUser){
-    console.warn('No websim user available');
-    // if no user object, still show overlay to allow manual join (unlikely)
-    overlay.classList.remove('hidden');
-  } else {
-    const existing = await findRegistration(currentUser.username);
-    if(!existing){
+  try {
+    const currentUser = await getCurrentUser();
+    if(!currentUser){
+      console.warn('No websim user available');
       overlay.classList.remove('hidden');
-      document.getElementById('not-found-msg').textContent = 'You need an invite code to join';
     } else {
-      // user found - do nothing (keep app visible)
-      console.log('User registration found', existing);
+      const existing = await findRegistration(currentUser.username);
+      if(!existing){
+        overlay.classList.remove('hidden');
+        document.getElementById('not-found-msg').textContent = 'You need an invite code to join';
+      } else {
+        console.log('User registration found', existing);
+      }
     }
+  } catch(err){
+    console.error(err);
+    overlay.classList.remove('hidden');
   }
 
-  // enable join when both fields filled
+  // rest of app wiring (invite boxes, display name, join handler)
   function refreshState(){
     const codeStr = inviteBoxes.map(b => (b.value || '').trim()).join('');
     const ok = codeStr.length === 8 && displayNameInput.value.trim().length;
@@ -59,7 +82,6 @@ import 'nipplejs'; // kept via importmap for potential future use
     statusEl.textContent = '';
   }
 
-  // wire invite box navigation and validation
   inviteBoxes.forEach((box, i) => {
     box.addEventListener('input', (e) => {
       box.value = (box.value || '').replace(/\D/g,'').slice(0,1);
@@ -73,7 +95,6 @@ import 'nipplejs'; // kept via importmap for potential future use
 
   displayNameInput.addEventListener('input', refreshState);
 
-  // join handler
   joinBtn.addEventListener('click', async function(){
     joinBtn.disabled = true;
     statusEl.textContent = '';
@@ -92,26 +113,19 @@ import 'nipplejs'; // kept via importmap for potential future use
     }
 
     try {
-      const username = currentUser ? currentUser.username : 'anonymous';
-
-      // try to find existing record; if present, update same row; else create
+      const username = (await getCurrentUser()) ? (await getCurrentUser()).username : 'anonymous';
       let existing = await findRegistration(username);
       const payload = {
         registered_at: new Date().toISOString(),
         display_name: displayName
       };
       if(existing){
-        // update column1 JSON object (we store JSON as string in column1)
         await room.collection('author_meta').update(existing.id, { col1: JSON.stringify(payload) });
         statusEl.textContent = 'Updated registration. Welcome back!';
       } else {
-        await room.collection('author_meta').create({
-          col1: JSON.stringify(payload)
-        });
+        await room.collection('author_meta').create({ col1: JSON.stringify(payload) });
         statusEl.textContent = 'Registration complete. Welcome!';
       }
-
-      // close overlay after short delay
       setTimeout(()=> overlay.classList.add('hidden'), 700);
     } catch (err){
       console.error(err);
@@ -120,10 +134,14 @@ import 'nipplejs'; // kept via importmap for potential future use
     }
   });
 
-  // prefill invite input hint (not the actual code) for UX
-  // set a small hint on the first box to indicate date format (one-char placeholders per box)
-  // if(inviteBoxes[0]) inviteBoxes[0].placeholder = 'M';
   refreshState();
 
-})();
+  // All initialization done — reveal app and hide loader with a small delay for smooth fade
+  requestAnimationFrame(() => {
+    appRoot.classList.add('ready');
+    loader.classList.add('hidden');
+    loader.setAttribute('aria-hidden', 'true');
+  });
+
+})(); 
 /* ...existing code... */

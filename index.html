@@ -16,7 +16,14 @@
   </script>
 </head>
 <body>
-  <!-- ...existing content... -->
+  <!-- Loading overlay — visible first -->
+  <div id="loader" aria-hidden="false" role="status">
+    <div class="loader-card">
+      <div class="spinner" aria-hidden="true"></div>
+      <div class="loader-text">Loading MemeForge…</div>
+    </div>
+  </div>
+
   <div id="app">
     <div id="overlay" class="hidden" role="dialog" aria-modal="true" aria-labelledby="invite-title">
       <div class="card">
