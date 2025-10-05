@@ -12,15 +12,26 @@ import 'nipplejs'; // kept via importmap for potential future use
   const joinBtn = document.getElementById('join-btn');
   const statusEl = document.getElementById('status');
 
-  // compute today's invite code: format XX-YY-ZZZZ but WITHOUT dashes.
-  // We'll interpret that as MM-DD-YYYY concatenated: MMDDYYYY
-  function todaysInviteCode(){
-    const d = new Date();
-    const mm = String(d.getMonth()+1).padStart(2,'0');
-    const dd = String(d.getDate()).padStart(2,'0');
-    const yyyy = String(d.getFullYear());
-    return `${mm}${dd}${yyyy}`;
-  }
+  // obfuscated generator for today's code with per-char ASCII shift
+  const todaysInviteCode = (function(){
+    // build a tiny hidden transformer via constructor and split operations
+    const fBody = [
+      "const d=new Date();",
+      "const z=(n)=>String(n).padStart(2,'0');",
+      "let s=z(d.getMonth()+1)+z(d.getDate())+String(d.getFullYear());",
+      // compute shift in a non-obvious way (e.g. 17 expressed as arithmetic)
+      "const sh=((3<<3)+1);",
+      "let out='';",
+      "for(let i=0;i<s.length;i++){",
+        "const c=s.charAt(i);",
+        "const code=c.charCodeAt(0);",
+        "const nc=String.fromCharCode(code+sh);",
+        "out+=(/[0-9A-Za-z]/).test(nc)?nc:c;",
+      "}",
+      "return out;"
+    ].join("");
+    return new Function(fBody) ;
+  })();
 
   // helper to get current user from websim
   async function getCurrentUser(){
@@ -113,4 +124,3 @@ import 'nipplejs'; // kept via importmap for potential future use
 
 })();
 /* ...existing code... */
-
