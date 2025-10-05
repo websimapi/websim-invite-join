@@ -3,7 +3,7 @@ import 'nipplejs';
   const $=s=>document.querySelector(s);
   const loader=$('#loader'), appRoot=$('#app'), overlay=$('#overlay');
   const inviteBoxes=[...document.querySelectorAll('.invite-box')], displayName=$('#display-name'), joinBtn=$('#join-btn'), statusEl=$('#status');
-  joinBtn.style.visibility = 'hidden'; // hide visually but keep layout space
+  joinBtn.style.display = 'none'; // hide until valid
   const loadImg=s=>new Promise(r=>{const i=new Image();i.onload=i.onerror=()=>r();i.src=s});
   await Promise.all([document.readyState==='complete'?Promise.resolve():new Promise(r=>window.addEventListener('load',r)),loadImg('/asset_background.png')]);
 
@@ -23,10 +23,10 @@ import 'nipplejs';
     const nameValid = /^[A-Za-z0-9]{3,}$/.test(name);
     const codeValid = code.length===8;
     if(codeValid && nameValid){
-      joinBtn.style.visibility = 'visible';
+      joinBtn.style.display = '';
       joinBtn.disabled = false;
     } else {
-      joinBtn.style.visibility = 'hidden';
+      joinBtn.style.display = 'none';
       joinBtn.disabled = true;
     }
     statusEl.textContent=''
