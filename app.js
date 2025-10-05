@@ -63,13 +63,13 @@ import 'nipplejs';
 
   const findRegistration=async username=>(await room.collection('author_meta').filter({username}).getList())?.[0]||null;
 
+  let initialUser = null;
   try{
     const user=await getCurrentUser();
+    initialUser = user;
     if(!user) overlay.classList.remove('hidden'); else { const ex=await findRegistration(user.username); if(!ex) overlay.classList.remove('hidden'); }
-    // don't render nav until after loader fades; render it now so it appears after loader hides
-    // we wait for the appRoot ready state below before actually showing the app UI
-    renderNav(user);
-  }catch(e){console.error(e);overlay.classList.remove('hidden'); renderNav(null)}
+    // DO NOT render nav yet; wait until loader hides to avoid UI flash
+  }catch(e){console.error(e);overlay.classList.remove('hidden'); initialUser = null}
 
   const refresh=()=>{
     const code=inviteBoxes.map(b=>(b.value||'').trim()).join('');
@@ -127,5 +127,7 @@ import 'nipplejs';
     appRoot.classList.add('ready');
     loader.classList.add('hidden');
     loader.setAttribute('aria-hidden','true');
+    // render nav only after loader is hidden to prevent flash of UI elements
+    renderNav(initialUser);
   });
 })();
