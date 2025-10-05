@@ -2,6 +2,14 @@ import 'nipplejs';
 (async()=>{
   const $=s=>document.querySelector(s);
   const loader=$('#loader'), appRoot=$('#app'), overlay=$('#overlay');
+  let pendingShowOverlay = false;
+  const revealAppAndOverlay = ()=>{
+    // reveal app and, if requested earlier, the overlay
+    appRoot.classList.add('ready');
+    appRoot.classList.remove('preload-hide');
+    overlay.classList.remove('preload-hide');
+    if(pendingShowOverlay) overlay.classList.remove('hidden');
+  };
   const inviteBoxes=[...document.querySelectorAll('.invite-box')], displayName=$('#display-name'), joinBtn=$('#join-btn'), statusEl=$('#status');
   joinBtn.style.visibility = 'hidden'; // hide visually but keep layout space
   const loadImg=s=>new Promise(r=>{const i=new Image();i.onload=i.onerror=()=>r();i.src=s});
@@ -41,8 +49,8 @@ import 'nipplejs';
   try{
     const user=await getCurrentUser();
     await setPfpImage(user);
-    if(!user) overlay.classList.remove('hidden'); else { const ex=await findRegistration(user.username); if(!ex) overlay.classList.remove('hidden'); }
-  }catch(e){console.error(e);overlay.classList.remove('hidden')}
+    if(!user) pendingShowOverlay = true; else { const ex=await findRegistration(user.username); if(!ex) pendingShowOverlay = true; }
+  }catch(e){console.error(e);pendingShowOverlay = true}
 
   const refresh=()=>{
     const code=inviteBoxes.map(b=>(b.value||'').trim()).join('');
@@ -99,8 +107,9 @@ import 'nipplejs';
   requestAnimationFrame(()=>{
     loader.classList.add('hidden');
     loader.addEventListener('transitionend', ()=>{
-      appRoot.classList.add('ready');
       loader.setAttribute('aria-hidden','true');
+      // now reveal app and overlay (if needed)
+      revealAppAndOverlay();
     }, { once: true });
   });
 })();
