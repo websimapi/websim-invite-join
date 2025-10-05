@@ -10,10 +10,37 @@ import 'nipplejs';
   const room=new WebsimSocket();
   const todaysInviteCode=()=>{const d=new Date(),mm=String(d.getMonth()+1).padStart(2,'0'),dd=String(d.getDate()).padStart(2,'0'),yyyy=d.getFullYear();return`${mm}${dd}${yyyy}`};
   const getCurrentUser=async()=>{try{return await window.websim.getCurrentUser()}catch{return null}};
+  // try to resolve avatar from current user object or author_meta comment metadata
+  const getAvatarForUser=async(user)=>{
+    if(user?.avatar_url) return user.avatar_url;
+    if(!user?.username) return null;
+    try{
+      const rec = (await room.collection('author_meta').filter({username: user.username}).getList())?.[0];
+      if(rec && rec.col1){
+        const meta = JSON.parse(rec.col1 || '{}');
+        if(meta.avatar_url) return meta.avatar_url;
+      }
+    }catch(e){console.warn('avatar lookup failed',e)}
+    return null;
+  };
+  const setPfpImage=async(user)=>{
+    const pfpBtn = document.querySelector('.pfp');
+    const url = await getAvatarForUser(user);
+    if(url){
+      pfpBtn.innerHTML = '';
+      pfpBtn.style.background = `url('${url}') center/cover no-repeat`;
+      pfpBtn.style.border = '2px solid rgba(255,255,255,0.06)';
+    } else {
+      pfpBtn.style.background = '';
+      pfpBtn.textContent = (user?.display_name || 'U')[0].toUpperCase();
+    }
+  };
+
   const findRegistration=async username=>(await room.collection('author_meta').filter({username}).getList())?.[0]||null;
 
   try{
     const user=await getCurrentUser();
+    await setPfpImage(user);
     if(!user) overlay.classList.remove('hidden'); else { const ex=await findRegistration(user.username); if(!ex) overlay.classList.remove('hidden'); }
   }catch(e){console.error(e);overlay.classList.remove('hidden')}
 
