@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Invite Join</title>
   <link href="https://fonts.googleapis.com/css2?family=Caladea&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script type="importmap">{"imports":{"nipplejs":"https://esm.sh/nipplejs@0.9.0"}}</script>
 </head>
@@ -13,6 +14,21 @@
   <div id="loader" role="status" aria-hidden="false"><div class="loader-card"><div class="spinner" aria-hidden="true"></div><div class="loader-text">Loading MemeForge…</div></div></div>
 
   <div id="app">
+    <!-- left navigation panel -->
+    <nav id="left-nav" aria-label="Main navigation">
+      <div class="nav-top">
+        <button class="nav-btn" aria-label="Home"><span class="material-icons-outlined" aria-hidden="true">home</span></button>
+        <button class="nav-btn" aria-label="Search"><span class="material-icons-outlined" aria-hidden="true">search</span></button>
+        <button class="nav-btn" aria-label="Notifications"><span class="material-icons-outlined" aria-hidden="true">notifications</span></button>
+      </div>
+      <div class="nav-center">
+        <button class="pfp" aria-label="User profile">U</button>
+      </div>
+      <div class="nav-bottom">
+        <button class="more" aria-label="More">…</button>
+      </div>
+    </nav>
+
     <div id="overlay" class="hidden" role="dialog" aria-modal="true" aria-labelledby="invite-title">
       <div class="card">
         <h1 id="invite-title">Meet MemeForge</h1>
@@ -32,7 +48,7 @@
       </div>
     </div>
 
-    <main id="main-content"><!-- ...existing content... --></main>
+    <main id="main-content"></main>
   </div>
   <script src="app.js" type="module"></script>
 <!-- ...existing content... -->
